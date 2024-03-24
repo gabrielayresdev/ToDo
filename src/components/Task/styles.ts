@@ -15,6 +15,8 @@ export const styles = StyleSheet.create({
   },
   title: {
     color: "#F2F2F2",
+    paddingTop: 12,
+    paddingBottom: 12,
   },
   completed: {
     textDecorationLine: "line-through",

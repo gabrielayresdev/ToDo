@@ -1,9 +1,15 @@
-import React from "react";
-import { Image, TextInput, View } from "react-native";
+import React, { SetStateAction } from "react";
+import { Image, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
+import Task from "../../types/Task";
 
-const SearchBar = () => {
+type Props = {
+  setTasks: React.Dispatch<SetStateAction<Task[]>>;
+};
+
+const SearchBar = ({ setTasks }: Props) => {
   const [focus, setFocus] = React.useState(false);
+  const [value, setValue] = React.useState("");
   return (
     <View style={styles.container}>
       <TextInput
@@ -12,10 +18,25 @@ const SearchBar = () => {
         placeholderTextColor="#808080"
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
+        value={value}
+        onChangeText={setValue}
       />
-      <View style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          setTasks((prevValue) => [
+            ...prevValue,
+            {
+              id: prevValue[prevValue.length - 1].id + 1,
+              title: value,
+              completed: false,
+            },
+          ]);
+          setValue("");
+        }}
+      >
         <Image source={require("../../../assets/plus.png")} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

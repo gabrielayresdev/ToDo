@@ -3,24 +3,7 @@ import { FlatList, Text, View } from "react-native";
 import { styles } from "./styles";
 import Task from "../Task/Index";
 
-export type TaskT = {
-  id: number;
-  title: string;
-  completed: boolean;
-};
-
-const TaskList = () => {
-  const [tasks, setTasks] = React.useState<TaskT[]>([
-    {
-      id: 1,
-      title: "Task 1",
-      completed: false,
-    },
-    { id: 2, title: "Task 2", completed: false },
-    { id: 3, title: "Task 3", completed: false },
-    { id: 4, title: "Task 4", completed: true },
-  ]);
-
+const TaskList = ({ tasks, setTasks }) => {
   return (
     <View style={styles.container}>
       <View style={styles.counters}>
