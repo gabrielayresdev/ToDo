@@ -27,7 +27,7 @@ const SearchBar = ({ setTasks }: Props) => {
           setTasks((prevValue) => [
             ...prevValue,
             {
-              id: prevValue[prevValue.length - 1].id + 1,
+              id: prevValue.length ? prevValue[prevValue.length - 1].id + 1 : 0,
               title: value,
               completed: false,
             },
