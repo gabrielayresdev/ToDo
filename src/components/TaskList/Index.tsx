@@ -1,9 +1,15 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
 import { styles } from "./styles";
+import TaskT from "../../types/Task";
 import Task from "../Task/Index";
 
-const TaskList = ({ tasks, setTasks }) => {
+type Props = {
+  tasks: TaskT[];
+  setTasks: React.Dispatch<React.SetStateAction<TaskT[]>>;
+};
+
+const TaskList = ({ tasks, setTasks }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.counters}>
@@ -23,7 +29,7 @@ const TaskList = ({ tasks, setTasks }) => {
       <FlatList
         data={tasks}
         keyExtractor={(item) => `${item.id}`}
-        renderItem={({ item }) => <Task task={item} />}
+        renderItem={({ item }) => <Task task={item} setTasks={setTasks} />}
         showsVerticalScrollIndicator={false}
         style={styles.list}
       ></FlatList>

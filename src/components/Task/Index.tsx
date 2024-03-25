@@ -1,14 +1,15 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { TaskT } from "../TaskList/Index";
+import TaskT from "../../types/Task";
 import { RadioButton } from "react-native-paper";
 import { styles } from "./styles";
 
 type Props = {
   task: TaskT;
+  setTasks: React.Dispatch<React.SetStateAction<TaskT[]>>;
 };
 
-const Task = ({ task }: Props) => {
+const Task = ({ task, setTasks }: Props) => {
   const [checked, setChecked] = React.useState(task.completed);
   return (
     <View style={styles.container}>
@@ -28,7 +29,12 @@ const Task = ({ task }: Props) => {
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.remove}>
+      <TouchableOpacity
+        style={styles.remove}
+        onPress={() =>
+          setTasks((prevValue) => prevValue.filter((t) => t.id !== task.id))
+        }
+      >
         <Image source={require("../../../assets/trash.png")} />
       </TouchableOpacity>
     </View>
