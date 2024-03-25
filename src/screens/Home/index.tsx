@@ -8,7 +8,6 @@ import Task from "../../types/Task";
 
 const Home = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);
-  console.log(tasks);
   return (
     <View style={styles.container}>
       <Header />

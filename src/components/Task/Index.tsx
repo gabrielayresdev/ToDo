@@ -10,21 +10,27 @@ type Props = {
 };
 
 const Task = ({ task, setTasks }: Props) => {
-  const [checked, setChecked] = React.useState(task.completed);
+  function toggleCompletion() {
+    setTasks((prevValue) => {
+      const index = prevValue.findIndex((item) => item.id === task.id);
+      prevValue[index].completed = !prevValue[index].completed;
+      return [...prevValue];
+    });
+  }
   return (
     <View style={styles.container}>
       <RadioButton
         value="completed"
         color="#5E60CE"
         uncheckedColor="#4EA8DE"
-        status={checked ? "checked" : "unchecked"}
-        onPress={() => setChecked(!checked)}
+        status={task.completed ? "checked" : "unchecked"}
+        onPress={toggleCompletion}
       />
       <TouchableOpacity
         style={styles.titleContainer}
-        onPress={() => setChecked(!checked)}
+        onPress={toggleCompletion}
       >
-        <Text style={[styles.title, checked && styles.completed]}>
+        <Text style={[styles.title, task.completed && styles.completed]}>
           {task.title}
         </Text>
       </TouchableOpacity>
